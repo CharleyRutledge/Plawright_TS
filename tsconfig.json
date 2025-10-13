@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "commonjs",
+        "moduleResolution": "Node",
+        "sourceMap": true,
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "resolveJsonModule": true,
+        "baseUrl": ".",
+        "paths": {
+            "@pages/*": [
+                "tests/pages/*"
+            ],
+            "@fixtures/*": [
+                "tests/fixtures/*"
+            ],
+            "@utils/*": [
+                "tests/utils/*"
+            ]
+        }
+    },
+    "include": [
+        "tests/**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
