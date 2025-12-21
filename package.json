@@ -3,7 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "build": "tsc",
+    "setup": "npm install && npx playwright install",
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui",
+    "test:chromium": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:webkit": "playwright test --project=webkit",
+    "test:mobile": "playwright test --project='Mobile Chrome' --project='Mobile Safari'",
+    "report": "playwright show-report",
+    "codegen": "playwright codegen"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CharleyRutledge/Plawright_TS.git"
@@ -18,6 +31,7 @@
   "homepage": "https://github.com/CharleyRutledge/Plawright_TS#readme",
   "devDependencies": {
     "@playwright/test": "^1.57.0",
-    "@types/node": "^25.0.3"
+    "@types/node": "^25.0.3",
+    "typescript": "^5.9.3"
   }
 }
