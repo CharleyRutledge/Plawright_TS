@@ -1,0 +1,41 @@
+import { Page, Locator } from '@playwright/test';
+import { BasePage } from './BasePage';
+export declare class HomePage extends BasePage {
+    readonly BASE_URL = "https://practice-automation.com";
+    readonly formFieldsLink: Locator;
+    readonly clickEventsLink: Locator;
+    readonly tablesLink: Locator;
+    readonly fileDownloadLink: Locator;
+    readonly fileUploadLink: Locator;
+    readonly popupsLink: Locator;
+    readonly modalsLink: Locator;
+    readonly slidersLink: Locator;
+    readonly accordionLink: Locator;
+    readonly hoverLink: Locator;
+    readonly jsDelaysLink: Locator;
+    readonly iframesLink: Locator;
+    readonly brokenImagesLink: Locator;
+    readonly brokenLinksLink: Locator;
+    readonly pageHeading: Locator;
+    constructor(page: Page);
+    goto(): Promise<void>;
+    clickFormFieldsModule(): Promise<void>;
+    clickClickEventsModule(): Promise<void>;
+    clickTablesModule(): Promise<void>;
+    clickFileDownloadModule(): Promise<void>;
+    clickFileUploadModule(): Promise<void>;
+    clickPopupsModule(): Promise<void>;
+    clickModalsModule(): Promise<void>;
+    clickSlidersModule(): Promise<void>;
+    clickAccordionModule(): Promise<void>;
+    clickHoverModule(): Promise<void>;
+    clickJavaScriptDelaysModule(): Promise<void>;
+    clickIframesModule(): Promise<void>;
+    clickBrokenImagesModule(): Promise<void>;
+    clickBrokenLinksModule(): Promise<void>;
+    isModuleVisible(moduleName: string): Promise<boolean>;
+    navigateToModule(moduleName: string): Promise<void>;
+    getPageHeading(): Promise<string>;
+    verifyHomePage(): Promise<boolean>;
+}
+//# sourceMappingURL=HomePage.d.ts.map

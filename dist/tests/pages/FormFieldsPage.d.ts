@@ -1,0 +1,47 @@
+import { Page, Locator } from '@playwright/test';
+import { BasePage } from './BasePage';
+export declare class FormFieldsPage extends BasePage {
+    readonly URL = "https://practice-automation.com/form-fields/";
+    readonly firstNameInput: Locator;
+    readonly surnameInput: Locator;
+    readonly emailInput: Locator;
+    readonly messageTextarea: Locator;
+    readonly wineCheckbox: Locator;
+    readonly beerCheckbox: Locator;
+    readonly waterCheckbox: Locator;
+    readonly maleRadio: Locator;
+    readonly femaleRadio: Locator;
+    readonly countryDropdown: Locator;
+    readonly submitButton: Locator;
+    readonly successMessage: Locator;
+    constructor(page: Page);
+    goto(): Promise<void>;
+    fillFirstName(name: string): Promise<void>;
+    getFirstName(): Promise<string>;
+    fillSurname(surname: string): Promise<void>;
+    getSurname(): Promise<string>;
+    fillEmail(email: string): Promise<void>;
+    getEmail(): Promise<string>;
+    fillMessage(message: string): Promise<void>;
+    getMessage(): Promise<string>;
+    checkWine(): Promise<void>;
+    uncheckWine(): Promise<void>;
+    isWineChecked(): Promise<boolean>;
+    checkBeer(): Promise<void>;
+    uncheckBeer(): Promise<void>;
+    isBeerChecked(): Promise<boolean>;
+    checkWater(): Promise<void>;
+    uncheckWater(): Promise<void>;
+    isWaterChecked(): Promise<boolean>;
+    selectMale(): Promise<void>;
+    isMaleSelected(): Promise<boolean>;
+    selectFemale(): Promise<void>;
+    isFemaleSelected(): Promise<boolean>;
+    selectCountry(country: string): Promise<void>;
+    getSelectedCountry(): Promise<string>;
+    submitForm(): Promise<void>;
+    getSuccessMessage(): Promise<string>;
+    isSuccessMessageVisible(): Promise<boolean>;
+    fillAndSubmitForm(firstName: string, surname: string, email: string, message: string, country: string, gender: 'male' | 'female', drinks: string[]): Promise<void>;
+}
+//# sourceMappingURL=FormFieldsPage.d.ts.map
