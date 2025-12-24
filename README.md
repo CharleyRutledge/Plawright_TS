@@ -1,62 +1,76 @@
-# Playwright TypeScript Test Automation Framework
+# Playwright TypeScript Test Automation for QA Practice Site
 
-A modern, scalable test automation framework built with Playwright and TypeScript for end-to-end web application testing.
+A comprehensive test automation framework built with Playwright and TypeScript for testing the QA practice website at https://qa-practice.razvanvancea.ro/.
 
 ## 🚀 What This Project Does
 
-This project provides a complete test automation framework using:
+This project provides end-to-end tests for a feature-rich QA practice site, covering:
 
-- **Playwright**: Microsoft's modern web testing framework for reliable end-to-end testing
-- **TypeScript**: Type-safe test development with better IDE support and error catching
-- **Page Object Model**: Organized test structure for maintainable and scalable test suites
-- **Cross-browser Testing**: Support for Chromium, Firefox, and WebKit browsers
-- **CI/CD Integration**: GitHub Actions workflows for automated testing
-- **Parallel Test Execution**: Fast test runs with parallel execution
-- **Comprehensive Reporting**: HTML reports with screenshots and traces
+- **Ecommerce Flows**: Login, cart management, checkout, logout
+- **Bugs Challenge**: Testing intentional bugs in forms, tables, and interactions
+- **API Testing**: REST API endpoints (requires Docker)
+- **GraphQL Testing**: GraphQL queries and mutations (requires Docker)
+- **Visual Testing**: Screenshot comparisons for UI validation
+- **Web Elements**: Forms, tables, dialogs, file operations, interactive elements
+
+Built with:
+- **Playwright v1.57.0**: Modern web testing framework
+- **TypeScript v5.9.3**: Type-safe test development
+- **Page Object Model**: Locator-based pattern for maintainable tests
+- **Docker Integration**: For API and GraphQL testing environments
 
 ### Key Features
 
-- ✅ **Type-Safe Testing**: Full TypeScript support with strict type checking
-- ✅ **Cross-Browser Compatibility**: Test across Chromium, Firefox, and WebKit
-- ✅ **Parallel Execution**: Run tests in parallel for faster execution
-- ✅ **Auto-Waiting**: Smart waiting mechanisms for reliable tests
-- ✅ **Rich Assertions**: Powerful assertion library for comprehensive validations
-- ✅ **Screenshot & Video**: Automatic capture on failures
-- ✅ **Trace Collection**: Detailed execution traces for debugging
-- ✅ **CI/CD Ready**: Pre-configured GitHub Actions workflows
-- ✅ **Environment Support**: dotenv integration for environment variables
+- ✅ **Ecommerce Testing**: Complete shopping flow validation
+- ✅ **Bug Detection**: Tests designed to expose intentional bugs
+- ✅ **API Integration**: REST and GraphQL endpoint testing
+- ✅ **Visual Regression**: Automated screenshot comparisons
+- ✅ **Cross-Browser**: Chromium, Firefox, WebKit support
+- ✅ **Parallel Execution**: Fast test runs
+- ✅ **Docker Ready**: Containerized API testing
+- ✅ **Comprehensive Reporting**: HTML reports with traces
 
 ## 📦 Installation
 
-### Quick Setup (One Command)
+### Prerequisites
 
-For new clones, you can set up everything with a single command:
+- **Node.js**: Version 18 or higher
+- **npm**: Latest version
+- **Docker**: For API and GraphQL testing (optional, but required for full test suite)
+
+### Quick Setup
 
 ```bash
 npm run setup
 ```
 
-This command will:
-1. Install all npm dependencies
-2. Install Playwright browsers (Chromium, Firefox, WebKit)
+This installs dependencies and Playwright browsers.
 
 ### Manual Setup
 
-If you prefer to set up step-by-step:
-
 ```bash
-# 1. Install dependencies
 npm install
-
-# 2. Install Playwright browsers
 npx playwright install
 ```
 
-### Prerequisites
+## 🐳 Docker Setup (Required for API/GraphQL Tests)
 
-- **Node.js**: Version 18 or higher (LTS recommended)
-- **npm**: Latest version
-- **Git**: For cloning the repository
+The QA practice site includes Docker-based API services:
+
+1. **REST API**: Runs on localhost:8887
+2. **GraphQL API**: Runs on localhost:5000
+
+To start the services:
+
+```bash
+# Start REST API container
+docker run -d -p 8887:8887 <rest-api-image>
+
+# Start GraphQL container
+docker run -d -p 5000:5000 <graphql-api-image>
+```
+
+Note: Check the QA practice site documentation for the exact Docker commands.
 
 ## 🏃 Running Tests
 
@@ -65,142 +79,155 @@ npx playwright install
 npm test
 ```
 
-### Specific Browsers
+### Specific Modules
 ```bash
-npm run test:chromium  # Run only in Chromium
-npm run test:firefox   # Run only in Firefox
-npm run test:webkit    # Run only in WebKit
+# Ecommerce tests
+npx playwright test tests/ecommerce/
+
+# Bugs challenge tests
+npx playwright test tests/bugs/
+
+# API tests
+npx playwright test tests/api/
+
+# GraphQL tests
+npx playwright test tests/graphql/
+
+# Visual tests
+npx playwright test tests/visual/
+
+# Web elements tests
+npx playwright test tests/elements/
 ```
 
 ### Debug Mode
 ```bash
-npm run test:debug     # Debug mode with browser inspector
+npm run test:debug
 ```
 
-### UI Mode (Interactive)
+### UI Mode
 ```bash
-npm run test:ui        # Visual test runner
-```
-
-### Headed Mode (Visible Browser)
-```bash
-npm run test:headed    # Run with visible browser windows
+npm run test:ui
 ```
 
 ### View Reports
 ```bash
-npm run report         # Open HTML test report
+npm run report
 ```
 
 ## 📁 Project Structure
 
 ```
 ├── tests/
-│   ├── example.spec.ts     # Example test cases
-│   ├── seed.spec.ts        # Seed test for AI agents
-│   ├── fixtures/           # Test fixtures and setup
-│   ├── pages/              # Page Object Models
-│   └── utils/              # Helper utilities
-├── specs/                  # Test specifications
-├── .github/
-│   └── workflows/          # GitHub Actions CI/CD
-├── playwright.config.ts    # Playwright configuration
-├── tsconfig.json          # TypeScript configuration
-├── package.json           # Project dependencies and scripts
-└── .env.example           # Environment variables template
+│   ├── qa-practice-test-plan.md    # Comprehensive test plan
+│   ├── seed.spec.ts               # Seed test for AI agents
+│   ├── fixtures/                  # Test fixtures and setup
+│   │   ├── authentication.setup.ts
+│   │   ├── customFixtures.ts
+│   │   ├── global.setup.ts
+│   │   └── global.teardown.ts
+│   ├── pages/                     # Page Object Models
+│   │   ├── BasePage.ts           # Common utilities
+│   │   ├── HomePage.ts           # Site navigation
+│   │   ├── EcommercePage.ts      # Ecommerce functionality
+│   │   ├── BugsPage.ts           # Bugs challenge
+│   │   ├── ApiPage.ts            # REST API testing
+│   │   └── GraphqlPage.ts        # GraphQL testing
+│   ├── ecommerce/                # Ecommerce test files
+│   │   ├── login.spec.ts
+│   │   ├── cart.spec.ts
+│   │   ├── checkout.spec.ts
+│   │   └── logout.spec.ts
+│   ├── bugs/                     # Bugs challenge tests
+│   ├── api/                      # REST API tests
+│   ├── graphql/                  # GraphQL tests
+│   ├── visual/                   # Visual regression tests
+│   └── elements/                 # Web elements tests
+├── playwright.config.ts          # Playwright configuration
+├── tsconfig.json                # TypeScript configuration
+├── package.json                 # Dependencies and scripts
+└── .env.example                 # Environment variables
 ```
 
-## ⚙️ Configuration
+## 🧪 Test Modules
 
-### Playwright Configuration (`playwright.config.ts`)
+### Ecommerce Testing
+- User authentication (login/logout)
+- Product browsing and cart management
+- Checkout process validation
+- Order confirmation
 
-The framework is configured for:
-- **Parallel Execution**: Tests run in parallel for speed
-- **Auto-Retry**: Failed tests retry automatically in CI
-- **Cross-Browser**: Chromium, Firefox, and WebKit support
-- **Trace Collection**: Automatic traces on test failures
-- **HTML Reporting**: Detailed test reports
+### Bugs Challenge
+- Form validation with intentional bugs
+- Table sorting/filtering issues
+- Interactive element problems
+- Error handling scenarios
 
-### TypeScript Configuration (`tsconfig.json`)
+### API Testing
+- RESTful endpoint validation
+- CRUD operations testing
+- Response format verification
+- Error code handling
 
-- **Strict Mode**: Full type checking enabled
-- **ES2020 Target**: Modern JavaScript features
-- **DOM Types**: Browser API type definitions
-- **Source Maps**: Debug support
+### GraphQL Testing
+- Query execution and validation
+- Mutation testing
+- Variable parameter handling
+- Schema exploration
 
-### Environment Variables
+### Visual Testing
+- Screenshot baseline creation
+- Visual regression detection
+- UI consistency validation
 
-Create a `.env` file from `.env.example`:
-
-```bash
-cp .env.example .env
-```
-
-Configure your environment variables as needed for your application under test.
+### Web Elements
+- Form field interactions
+- Table data manipulation
+- Dialog and popup handling
+- File upload/download
+- Interactive components (sliders, accordions)
 
 ## 🧪 Writing Tests
 
-### Basic Test Structure
+### Using Page Objects
 
 ```typescript
 import { test, expect } from '@playwright/test';
+import { EcommercePage } from '../pages/EcommercePage';
+import { HomePage } from '../pages/HomePage';
 
-test('should navigate and verify content', async ({ page }) => {
-  // Navigate to your application
-  await page.goto('https://your-app.com');
+test.describe('Ecommerce Login', () => {
+  test('successful login', async ({ page }) => {
+    const homePage = new HomePage(page);
+    const ecommercePage = new EcommercePage(page);
 
-  // Interact with elements
-  await page.click('button[type="submit"]');
+    await page.goto('https://qa-practice.razvanvancea.ro/');
+    await homePage.ecommerceLink.click();
+    await ecommercePage.navigateToLogin();
+    await ecommercePage.login('username', 'password');
 
-  // Make assertions
-  await expect(page.locator('.success-message')).toBeVisible();
+    await expect(page.locator('.dashboard')).toBeVisible();
+  });
 });
 ```
 
-### Page Object Model
-
-Create reusable page objects in `tests/pages/`:
-
-```typescript
-// tests/pages/LoginPage.ts
-import { Page, Locator } from '@playwright/test';
-
-export class LoginPage {
-  readonly page: Page;
-  readonly emailInput: Locator;
-  readonly passwordInput: Locator;
-  readonly loginButton: Locator;
-
-  constructor(page: Page) {
-    this.page = page;
-    this.emailInput = page.locator('[data-testid="email"]');
-    this.passwordInput = page.locator('[data-testid="password"]');
-    this.loginButton = page.locator('[data-testid="login-button"]');
-  }
-
-  async goto() {
-    await this.page.goto('/login');
-  }
-
-  async login(email: string, password: string) {
-    await this.emailInput.fill(email);
-    await this.passwordInput.fill(password);
-    await this.loginButton.click();
-  }
-}
-```
-
-Use in tests:
+### API Testing Example
 
 ```typescript
 import { test, expect } from '@playwright/test';
-import { LoginPage } from './pages/LoginPage';
+import { ApiPage } from '../pages/ApiPage';
 
-test('user can login', async ({ page }) => {
-  const loginPage = new LoginPage(page);
-  await loginPage.goto();
-  await loginPage.login('user@example.com', 'password123');
-  await expect(page).toHaveURL('/dashboard');
+test('GET request', async ({ page }) => {
+  const apiPage = new ApiPage(page);
+
+  await page.goto('https://qa-practice.razvanvancea.ro/');
+  await apiPage.navigateToApiTesting();
+  await apiPage.selectMethod('GET');
+  await apiPage.enterUrl('http://localhost:8887/api/users');
+  await apiPage.sendRequest();
+
+  const response = await apiPage.getResponseText();
+  expect(response).toContain('users');
 });
 ```
 
@@ -208,127 +235,35 @@ test('user can login', async ({ page }) => {
 
 ### Adding New Tests
 
-1. Create test files in `tests/` directory with `.spec.ts` extension
-2. Follow the naming convention: `feature-name.spec.ts`
-3. Use descriptive test names
-4. Group related tests with `test.describe()`
+1. Create test files in the appropriate module directory
+2. Use `.spec.ts` extension
+3. Follow the Page Object Model pattern
+4. Update the test plan in `tests/qa-practice-test-plan.md`
 
-### Code Generation
-
-Generate test code interactively:
-
-```bash
-npm run codegen
-```
-
-This opens a browser where you can record interactions and generate test code.
-
-### Building the Project
-
+### Building
 ```bash
 npm run build
 ```
 
-Compiles TypeScript to JavaScript in the `dist/` directory.
-
 ## 🚀 CI/CD
 
-### GitHub Actions
-
-The project includes two GitHub Actions workflows:
-
-1. **`playwright.yml`**: Runs tests on every push and pull request
-2. **`copilot-setup-steps.yml`**: Setup validation workflow
-
-### Local CI Simulation
-
-To simulate CI locally:
-
-```bash
-# Run tests with CI configuration
-npx playwright test --project=chromium --project=firefox --project=webkit
-```
-
-## 🐛 Debugging
-
-### Debug a Specific Test
-
-```bash
-npx playwright test tests/example.spec.ts --debug
-```
-
-### Step-by-Step Debugging
-
-```bash
-# Add debugger statements in your test
-test('debug example', async ({ page }) => {
-  debugger; // Execution will pause here in debug mode
-  await page.goto('/');
-});
-```
-
-### Browser Developer Tools
-
-```bash
-# Run in headed mode to see browser interactions
-npm run test:headed
-```
+Pre-configured GitHub Actions for automated testing on push/PR.
 
 ## 📊 Reporting
 
-### HTML Reports
-
-After test execution, view detailed reports:
-
+View HTML reports with screenshots and traces:
 ```bash
 npm run report
 ```
 
-Reports include:
-- Test execution timeline
-- Screenshots on failures
-- Trace files for debugging
-- Performance metrics
-
-### CI Artifacts
-
-In CI, test reports are automatically uploaded as artifacts and can be downloaded for analysis.
-
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/your-feature`
-3. Make your changes
-4. Run tests: `npm test`
-5. Commit your changes: `git commit -m 'Add your feature'`
-6. Push to the branch: `git push origin feature/your-feature`
-7. Open a Pull Request
-
-### Code Style
-
-- Use TypeScript with strict mode enabled
-- Follow the existing code structure and naming conventions
-- Add JSDoc comments for public methods
-- Write descriptive test names and assertions
+Follow the existing structure and add tests for new features.
 
 ## 📝 License
 
-ISC License - see the [LICENSE](LICENSE) file for details.
-
-## 🆘 Support
-
-- **Issues**: [GitHub Issues](https://github.com/CharleyRutledge/Plawright_TS/issues)
-- **Documentation**: [Playwright Docs](https://playwright.dev/docs)
-- **TypeScript**: [TypeScript Handbook](https://www.typescriptlang.org/docs/)
-
-## 🔄 Version History
-
-- **v1.0.0**: Initial release with basic Playwright TypeScript setup
-  - Cross-browser testing support
-  - CI/CD integration
-  - Page Object Model structure
-  - TypeScript configuration
+ISC License
 
 ---
 
-**Happy Testing!** 🎭
+**Test the QA Practice Site!** 🎭
